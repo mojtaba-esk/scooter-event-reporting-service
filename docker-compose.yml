@@ -67,6 +67,7 @@ services:
     environment:
       SCOOTIN_API_PATH: ${SCOOTIN_API_PATH:-http://server:8080/}
       STATIC_API_KEY: ${STATIC_API_KEY}
+      NUM_OF_CLIENTS: ${NUM_OF_CLIENTS:-3}
     restart: always
     security_opt:
       - "seccomp:unconfined"
