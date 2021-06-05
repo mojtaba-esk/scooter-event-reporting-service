@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <style type="text/css">
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script type="text/javascript" src="/ui/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        /*-----------*/
+
+        var markers = new Map();
+        var tripTimer = 0;
+
+        function loadLocations(map) {
+
+            const apiPath = "/search/movingScooters";
+            $.get(apiPath, function (data) {
+                if (tripTimer++ > 5) {
+                    tripTimer = 0;
+                    // Clean up the trips
+                    markers.forEach((marker, uuid, mapItem) => {
+                        marker.setMap(null);
+                        mapItem.delete()
+                    });
+                }
+
+                if (data) {
+                    for (row of data) {
+                        const latLng = { lat: row.lat, lng: row.lon };
+                        if (markers.has(row.uuid)) {
+                            const marker = markers.get(row.uuid);
+                            if (latLng.lat != marker.position.lat() || latLng.lng != marker.position.lng()) {
+                                marker.setPosition(latLng);
+                            }
+                        } else {
+                            markers.set(row.uuid,
+                                new google.maps.Marker({
+                                    position: latLng,
+                                    map,
+                                    icon: "/ui/icons/electric-scooter.png",
+                                    title: row.uuid
+                                })
+                            );
+                        }
+                    }
+                }
+
+            }).always(() => {
+                setTimeout(() => { loadLocations(map); }, 2 * 1000); // Keep checking it
+            });
+        }
+
+        /*-----------*/
+
+        function initMap() {
+
+            const centerLatLng = { lat: 51.03879021785863, lng: 13.76123931989416 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 14,
+                center: centerLatLng,
+            });
+
+            /**---------*/
+
+            $(document).ready(function () { loadLocations(map); });
+
+        }
+
+        /*-----------*/
+
+    </script>
+
+</head>
+
+<body>
+    <div id="map">Loading the map...</div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"
+        async></script>
+
+</body>
+
+</html>
