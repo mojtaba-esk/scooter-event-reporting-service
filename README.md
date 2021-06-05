@@ -63,7 +63,6 @@ See the dummy client logs:
 - `STATIC_API_KEY`: Static API Key to Autheticate to the APIs
 - `NUM_OF_CLIENTS`: Number of dummy clients
 
-If you change ech of these values in the `docker-compose.yml` file, you need to run the follwoing command in order to reflect the changes:
+If you change ech of these values in the `docker-compose.yml` file, you need to run the follwoing command in order to reflect the changes: `sudo docker-compose up -d`
 
-`sudo docker-compose up`
 PS: this command must be executed in the same directory where `docker-compose.yml` file is located (_e.g. NordSec-Scootin_).
