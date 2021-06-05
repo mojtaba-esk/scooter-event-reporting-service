@@ -2,7 +2,7 @@
 APIs Documentation
 ===================
 
-### /serverReady
+### GET /serverReady
 This is the very firts API that returns `true` if the API server is ready to be used. 
 
 Why do we need it?
@@ -24,7 +24,7 @@ true
 
 ------------
 
-### /clients
+### GET /clients
 
 This API retrieves all the clients with pagination. Please note that to call this API you need to send your API key in the header as well. 
 For sake of simplicity, as requested, we use a Static API Key which by default is `Prefix.HashOfSomeSecretKey` and it is configurable by editing `.env` file in the project's root.
@@ -65,7 +65,7 @@ Transfer-Encoding: chunked
 
 ------------
 
-### /scooters
+### GET /scooters
 
 This API retrieves all the scooters with pagination. 
 
@@ -103,6 +103,132 @@ Transfer-Encoding: chunked
     ...
   ]
 }
+```
+
+----------
+
+### GET /scooters/:uuid
+
+This API retrieves the scooter with the given __UUID__ and returnd _404_ error if not found. 
+
+#### Call Example:
+`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/a6739cc5-a016-4d9b-81e8-dc32e90dc3a4`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Sat, 05 Jun 2021 21:21:57 GMT
+Content-Length: 179
+
+{
+  "last_update": "2021-06-05T18:27:05.568591Z",
+  "lat": 51.043430147739755,
+  "lon": 13.769144774215633,
+  "occupied": false,
+  "uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4"
+}
+```
+
+----------
+
+
+### GET /scooters/:uuid/location
+
+This API retrieves the last known location of the scooter with the given __UUID__ and returnd _404_ error if not found.
+Please note that, this location is for a moving scooter the stationary scooters' location can be retrieved with the previous API.
+
+#### Call Example:
+`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Sat, 05 Jun 2021 21:31:21 GMT
+Content-Length: 99
+
+{
+  "lat": 51.04386284695899,
+  "lon": 13.75715747707119,
+  "time": "2021-06-05T18:27:08.519826Z"
+}
+```
+
+----------
+
+
+### POST /scooters/:uuid/location
+
+This API updates the location of a moving scooter with the given __UUID__. This API is meant to be called by the scooter itself every 3 seconds.
+
+#### Input Format:
+```
+{
+		"lat": <Float Number>,
+		"lon": <Float Number>
+}
+```
+#### Call Example:
+`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location --data '{ "lat": 51.05, "lon": 13.71}'`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Date: Sat, 05 Jun 2021 21:34:10 GMT
+Content-Length: 0
+```
+
+----------
+
+
+### POST /search/freeScooters
+
+This API receives two pairs of coordinations and searches in a semi-rectangular area for free (available) scooters.
+Note: This API returns a specific maximum number of scooters (_default 200 but is configurable_).
+
+#### Input Format:
+```
+{
+	"start": {
+		"lat": <Float Number>,
+		"lon": <Float Number>
+	},
+	"end": {
+		"lat": <Float Number>,
+		"lon": <Float Number>
+	}
+}
+```
+
+#### Call Example:
+`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/search/freeScooters --data '{"start": {"lat": 50.01,"lon": 12.11},"end": {"lat": 53.16,"lon": 14.67}}'`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Sat, 05 Jun 2021 21:40:03 GMT
+Transfer-Encoding: chunked
+
+[
+  {
+    "lat": 51.043430147739755,
+    "lon": 13.769144774215633,
+    "uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4"
+  },
+  {
+    "lat": 51.04222290097839,
+    "lon": 13.756148248464667,
+    "uuid": "a7560273-2eac-401c-b051-a95d5e6eecaf"
+  },
+  {
+    "lat": 51.02161991146944,
+    "lon": 13.770331742066585,
+    "uuid": "3e8d8571-fbdd-4c1a-8d54-c956758c3b97"
+  },
+  ...
+]
 ```
 
 ----------
