@@ -1,5 +1,5 @@
 
-APIs Documentation
+API Documentation
 ===================
 
 ##### Table of Content
