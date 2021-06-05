@@ -234,6 +234,102 @@ Transfer-Encoding: chunked
 ----------
 
 
+### GET /search/movingScooters
+
+This API retrieves the last known location of all the moving scooters.
+
+_Note 1: This API is used only for demo visulization purpose of this project._
+
+_Note 2: This API does not use any API Key._
+
+#### Call Example:
+`curl -X GET -H 'Content-Type: application/json' -i http://localhost:8080/search/movingScooters`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Sat, 05 Jun 2021 21:45:38 GMT
+Transfer-Encoding: chunked
+
+[
+  {
+    "lat": 51.03551597910139,
+    "lon": 13.764477488309588,
+    "time": "2021-06-05T21:45:37.975103Z",
+    "uuid": "df5ab223-2307-4ec6-bf86-fe3208974560"
+  },
+  {
+    "lat": 51.042582329008674,
+    "lon": 13.759892094880684,
+    "time": "2021-06-05T18:27:20.615891Z",
+    "uuid": "fa990519-d77b-4dbd-a8fe-95cb4c8320a6"
+  },
+  ...
+]
+```
+
+----------
 
 
-`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: myKey' -i http://localhost:8080/clients --data '{ "lat" :555}'`
+### POST /tripStart
+
+This API receives the __UUID__ of a particular scooter and the __UUID__ of the user (client) who is using it and starts a trip.
+After successfullt starting a trip, this API genrates and returns a __UUID__ of the trip to be used in future for tracking the trip.
+
+#### Input Format:
+```
+{
+	"scooter_uuid": "<String>",
+	"user_uuid": "<String>",
+	"start": {
+		"lat": <Float Number>,
+		"lon": <Float Number>
+	}
+}
+```
+
+#### Call Example:
+`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripStart --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","start": {"lat": 50.01,"lon": 12.11}}'`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Sat, 05 Jun 2021 21:53:51 GMT
+Content-Length: 38
+
+"7cdbee24-271a-4ed6-b019-5c45dde76dcb"
+```
+
+----------
+
+
+### POST /tripEnd
+
+This API receives the __UUID__ of a particular scooter and the __UUID__ of the user (client) who is using it and ends the ongoing trip.
+After successfullt ending the trip, it updates the stationary location of the scooter and marks it as free to use.
+
+#### Input Format:
+```
+{
+	"scooter_uuid": "<String>",
+	"user_uuid": "<String>",
+	"end": {
+		"lat": <Float Number>,
+		"lon": <Float Number>
+	}
+}
+```
+
+#### Call Example:
+`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripEnd --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","end": {"lat": 50.01,"lon": 12.11}}'`
+
+__Output:__
+```
+HTTP/1.1 200 OK
+Date: Sat, 05 Jun 2021 21:59:11 GMT
+Content-Length: 0
+```
+
+----------
