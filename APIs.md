@@ -186,8 +186,8 @@ This API updates the location of a moving scooter with the given __UUID__. This 
 #### Input Format:
 ```
 {
-		"lat": <Float Number>,
-		"lon": <Float Number>
+	"lat": <Float Number>,
+	"lon": <Float Number>
 }
 ```
 #### Call Example:
