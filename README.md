@@ -9,14 +9,13 @@ git clone https://github.com/mojtaba-esk/NordSec-Scootin.git
 cd NordSec-Scootin
 sudo docker-compose up -d
 ```
+Note: _The database, tables, indices, etc will be created automatically and will be filled with some random data._
 
-## Build from source code:
+Once it is up, you can see the status of moving scooters in your browser: http://localhost:8080/
 
-```
-git clone https://github.com/mojtaba-esk/NordSec-Scootin.git
-cd NordSec-Scootin
-sudo docker-compose up -d --build
-```
+![Moving scooters with 50 Random clients](demo.gif "Moving scooters with 50 Random clients")
+
+
 
 ## Development:
 To activate the development mode you need to open `docker-compose.yml` file, under the desired service (e.g. server), change the target to development:
@@ -34,3 +33,9 @@ Please Change the target to `test` then build the container:
 
 You will see the test result in the terminal.
 
+## Logs:
+See API server logs:
+`sudo docker logs -f scootin-api-server`
+
+See the dummy client logs:
+`sudo docker logs -f scootin-dummy-client`
