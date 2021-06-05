@@ -6,7 +6,7 @@ To see details and examples about the APIs head over to the [API Documentation](
 
 ## Quick Setup
 
-To run the App simply copy and execute the following code into your terminal:
+To setup and run the Service simply copy and execute the following code into your terminal:
 
 ```
 git clone https://github.com/mojtaba-esk/NordSec-Scootin.git
@@ -50,7 +50,7 @@ See the dummy client logs:
 - `SERVING_ADDR`: Service address for the API server
 - `STATIC_API_KEY`: Static API Key to Autheticate to the APIs
 
-- `REDIS_USER`: Redis Username (_Please note that the current version of the App does not use redis_)
+- `REDIS_USER`: Redis Username (_Please note that the current version of the Service does not use redis_)
 - `REDIS_PASSWORD`: Redis Password
 - `REDIS_HOST`: Redis Host
 - `REDIS_PORT`: Redis Port
