@@ -39,3 +39,9 @@ Please Change the target to `test` then build the container:
 
 You will see the test result in the terminal.
 
+## Logs:
+See API server logs:
+`sudo docker logs -f scootin-api-server`
+
+See the dummy client logs:
+`sudo docker logs -f scootin-dummy-client`
