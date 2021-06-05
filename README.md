@@ -27,9 +27,9 @@ To activate the development mode you need to open `docker-compose.yml` file, und
 ```
 
 ## Test
-Please Change the target to `test` then build the container:
+Please Change the target to `test` then build the API server container:
 
-`sudo docker-compose up --build` 
+`sudo docker-compose up --build server` 
 
 You will see the test result in the terminal.
 
