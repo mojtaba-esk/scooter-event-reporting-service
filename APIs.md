@@ -2,6 +2,18 @@
 APIs Documentation
 ===================
 
+##### Table of Content
+* [GET /serverReady](#get-serverready)
+* [GET /clients](#get-clients)
+* [GET /scooters](#get-scooters)
+* [GET /scooters/:uuid](#get-scootersuuid)
+* [GET /scooters/:uuid/location](#get-scootersuuidlocation)
+* [POST /scooters/:uuid/location](#post-scootersuuidlocation)
+* [POST /search/freeScooters](#post-searchfreescooters)
+* [GET /search/movingScooters](#get-searchmovingscooters)
+* [POST /tripStart](#post-tripstart)
+* [POST /tripEnd](#post-tripend)
+
 ### GET /serverReady
 This is the very firts API that returns `true` if the API server is ready to be used. 
 
