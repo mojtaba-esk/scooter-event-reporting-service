@@ -10,6 +10,10 @@ cd NordSec-Scootin
 sudo docker-compose up -d
 ```
 
+Once it is up, you can see the status of moving scooters in your browser: http://localhost:8080/
+
+![Moving scooters with 50 Random clients](demo.gif "Moving scooters with 50 Random clients")
+
 ## Build from source code:
 
 ```
