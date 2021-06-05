@@ -9,6 +9,7 @@ git clone https://github.com/mojtaba-esk/NordSec-Scootin.git
 cd NordSec-Scootin
 sudo docker-compose up -d
 ```
+Note: _The database, tables, indices, etc will be created automatically and will be filled with some random data._
 
 Once it is up, you can see the status of moving scooters in your browser: http://localhost:8080/
 
