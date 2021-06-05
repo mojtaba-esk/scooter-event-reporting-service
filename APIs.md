@@ -42,7 +42,9 @@ This API retrieves all the clients with pagination. Please note that to call thi
 For sake of simplicity, as requested, we use a Static API Key which by default is `Prefix.HashOfSomeSecretKey` and it is configurable by editing `.env` file in the project's root.
 
 #### Call Example:
-`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/clients`
+```
+curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/clients
+```
 
 __Output:__
 ```
@@ -82,7 +84,9 @@ Transfer-Encoding: chunked
 This API retrieves all the scooters with pagination. 
 
 #### Call Example:
-`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters`
+```
+curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters
+```
 
 __Output:__
 ```
@@ -124,7 +128,9 @@ Transfer-Encoding: chunked
 This API retrieves the scooter with the given __UUID__ and returnd _404_ error if not found. 
 
 #### Call Example:
-`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/a6739cc5-a016-4d9b-81e8-dc32e90dc3a4`
+```
+curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/a6739cc5-a016-4d9b-81e8-dc32e90dc3a4
+```
 
 __Output:__
 ```
@@ -151,7 +157,10 @@ This API retrieves the last known location of the scooter with the given __UUID_
 Please note that, this location is for a moving scooter the stationary scooters' location can be retrieved with the previous API.
 
 #### Call Example:
-`curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location`
+```
+curl -X GET -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location
+```
+
 
 __Output:__
 ```
@@ -182,7 +191,9 @@ This API updates the location of a moving scooter with the given __UUID__. This 
 }
 ```
 #### Call Example:
-`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location --data '{ "lat": 51.05, "lon": 13.71}'`
+```
+curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/scooters/cb7fb6f7-7dfd-4779-b266-003736f17e1a/location --data '{ "lat": 51.05, "lon": 13.71}'
+```
 
 __Output:__
 ```
@@ -214,7 +225,9 @@ Note: This API returns a specific maximum number of scooters (_default 200 but i
 ```
 
 #### Call Example:
-`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/search/freeScooters --data '{"start": {"lat": 50.01,"lon": 12.11},"end": {"lat": 53.16,"lon": 14.67}}'`
+```
+curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/search/freeScooters --data '{"start": {"lat": 50.01,"lon": 12.11},"end": {"lat": 53.16,"lon": 14.67}}'
+```
 
 __Output:__
 ```
@@ -255,7 +268,10 @@ _Note 1: This API is used only for demo visulization purpose of this project._
 _Note 2: This API does not use any API Key._
 
 #### Call Example:
-`curl -X GET -H 'Content-Type: application/json' -i http://localhost:8080/search/movingScooters`
+```
+curl -X GET -H 'Content-Type: application/json' -i http://localhost:8080/search/movingScooters
+```
+
 
 __Output:__
 ```
@@ -302,7 +318,9 @@ After successfullt starting a trip, this API genrates and returns a __UUID__ of 
 ```
 
 #### Call Example:
-`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripStart --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","start": {"lat": 50.01,"lon": 12.11}}'`
+```
+curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripStart --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","start": {"lat": 50.01,"lon": 12.11}}'
+```
 
 __Output:__
 ```
@@ -335,7 +353,10 @@ After successfullt ending the trip, it updates the stationary location of the sc
 ```
 
 #### Call Example:
-`curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripEnd --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","end": {"lat": 50.01,"lon": 12.11}}'`
+```
+curl -X POST -H 'Content-Type: application/json' -H 'X-API-KEY: Prefix.HashOfSomeSecretKey'  -i http://localhost:8080/tripEnd --data '{"scooter_uuid": "a6739cc5-a016-4d9b-81e8-dc32e90dc3a4","user_uuid": "f8d2405d-ab7c-4e2a-8790-ab8e4d68d213","end": {"lat": 50.01,"lon": 12.11}}'
+```
+
 
 __Output:__
 ```
