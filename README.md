@@ -1,5 +1,6 @@
 # NordSec Scootin
-This is a backend service that exposes a REST-like API intended for scooter event collecting and reporting to mobile clients.
+This is a backend service that exposes a REST-like API intended for scooter event collecting and reporting to mobile clients. Mobile clients can query scooter locations and statuses in any rectangular location (e.g. two pair of coordinates), and filter them by status. 
+While there will be no actual mobile clients, another service called `dummy-client` is implemented which spawns a configurable number of fake clients that run nearly simultanouse in individual _Goroutines_ (finding scooters, travelling for 10-15 seconds whilst updating location every 3 seconds, and resting for 2-5 seconds before starting next trip).
 
 To see details and examples about the APIs head over to the [API Documentation](APIs.md).
 
