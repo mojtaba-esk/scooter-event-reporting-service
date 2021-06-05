@@ -1,15 +1,19 @@
 # NordSec Scootin
+This is a backend service that exposes a REST-like API intended for scooter event collecting and reporting to mobile clients.
+
+To see details and examples about the APIs head over to the [API Documentation](APIs.md).
+
 
 ## Quick Setup
 
-To run the App simply copy the following code into your terminal:
+To run the App simply copy and execute the following code into your terminal:
 
 ```
 git clone https://github.com/mojtaba-esk/NordSec-Scootin.git
 cd NordSec-Scootin
 sudo docker-compose up -d
 ```
-Note: _The database, tables, indices, etc will be created automatically and will be filled with some random data._
+Note: _The database, tables, indices, etc will be created automatically on the first launch and will be filled with some random data._
 
 Once it is up, you can see the status of moving scooters in your browser: http://localhost:8080/
 
