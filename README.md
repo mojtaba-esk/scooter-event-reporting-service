@@ -10,8 +10,8 @@ To see details and examples about the APIs head over to the [API Documentation](
 To setup and run the Service simply copy and execute the following code into your terminal:
 
 ```
-git clone https://github.com/mojtaba-esk/simple-scooter-backend.git
-cd simple-scooter-backend
+git clone https://github.com/mojtaba-esk/scooter-event-reporting-service.git
+cd scooter-event-reporting-service
 sudo docker-compose up -d
 ```
 Note: _The database, tables, indices, etc will be created automatically on the first launch and will be filled with some random data._
@@ -70,4 +70,4 @@ See the dummy client logs:
 
 If you change ech of these values in the `docker-compose.yml` file, you need to run the follwoing command in order to reflect the changes: `sudo docker-compose up -d`
 
-PS: this command must be executed in the same directory where `docker-compose.yml` file is located (_e.g. simple-scooter-backend_).
+PS: this command must be executed in the same directory where `docker-compose.yml` file is located (_e.g. scooter-event-reporting-service_).
